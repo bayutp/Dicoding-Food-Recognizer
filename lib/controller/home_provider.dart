@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class HomeProvider extends ChangeNotifier {
   String? imagePath;
@@ -26,6 +27,38 @@ class HomeProvider extends ChangeNotifier {
 
     if (pickedFile != null) {
       _setImages(pickedFile);
+    }
+  }
+
+  void cropImage(BuildContext context) async {
+    if (imagePath != null) {
+      final CroppedFile? cropped = await ImageCropper().cropImage(
+        sourcePath: imagePath!,
+        aspectRatio: const CropAspectRatio(ratioX: 2, ratioY: 3),
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            aspectRatioPresets: [
+              CropAspectRatioPreset.original,
+              CropAspectRatioPreset.square,
+            ],
+          ),
+          IOSUiSettings(
+            title: 'Cropper',
+            aspectRatioPresets: [
+              CropAspectRatioPreset.original,
+              CropAspectRatioPreset.square,
+            ],
+          ),
+          WebUiSettings(context: context),
+        ],
+      );
+
+      if (cropped != null) {
+        _setImages(XFile(cropped.path));
+      }
     }
   }
 }

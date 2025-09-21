@@ -22,7 +22,20 @@ class _HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Food Recognizer")),
+      appBar: AppBar(
+        title: Text("Food Recognizer"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              final imagePath = context.read<HomeProvider>().imagePath;
+              if (imagePath != null) {
+                context.read<HomeProvider>().cropImage(context);
+              }
+            },
+            icon: Icon(Icons.crop),
+          ),
+        ],
+      ),
       body: _HomeBody(),
     );
   }
@@ -70,7 +83,7 @@ class _HomeBody extends StatelessWidget {
                           child: const Text("Gallery"),
                         ),
                       ),
-                      SizedBox(width: 8,),
+                      SizedBox(width: 8),
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () =>
