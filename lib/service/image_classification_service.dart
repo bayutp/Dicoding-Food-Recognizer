@@ -1,6 +1,5 @@
 import 'dart:isolate';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:food_recognizer_app/service/isolate_inference.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
@@ -24,8 +23,6 @@ class ImageClassificationService {
     interpreter = await Interpreter.fromAsset(modelPath, options: options);
     inputTensor = interpreter.getInputTensors().first;
     outputTensor = interpreter.getOutputTensors().first;
-
-    debugPrint("Interpreter log successfully");
   }
 
   Future<void> _loadLabels() async {
@@ -41,9 +38,7 @@ class ImageClassificationService {
     await isolateInference.start();
   }
 
-  Future<Map<String, double>> inferenceImageFileIsolate(
-    Uint8List bytes,
-  ) async {
+  Future<Map<String, double>> inferenceImageFileIsolate(Uint8List bytes) async {
     var isolateModel = InferenceModel(
       bytes,
       interpreter.address,
