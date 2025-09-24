@@ -70,9 +70,7 @@ class _DetailViewState extends State<DetailView> {
                     ),
                   ),
                   SizedBox(width: 8),
-                  Text(
-                    "Presentase: ${(widget.food.score * 100).toStringAsFixed(2)}%",
-                  ),
+                  Text("${(widget.food.score * 100).toStringAsFixed(2)}%"),
                 ],
               ),
             ),
@@ -88,8 +86,91 @@ class _DetailViewState extends State<DetailView> {
                     DetailErrorResultState(errorMsg: var msg) => Center(
                       child: Text(msg),
                     ),
-                    DetailLoadedResultState(result: var foodDetail) => Text(
-                      foodDetail[0].strMeal,
+                    DetailLoadedResultState(result: var foodDetail) => Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadiusGeometry.circular(16),
+                              child: Image.network(
+                                foodDetail[0].strMealThumb,
+                                width: 150,
+                                height: 150,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    foodDetail[0].strMeal,
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${foodDetail[0].strCategory} - ${foodDetail[0].strArea}",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          "Ingredients",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: foodDetail[0].ingredients.length,
+                            itemBuilder: (context, index) {
+                              final ingredient = foodDetail[0].ingredients[index];
+                              final measure = foodDetail[0].measures[index];
+                              return ListTile(
+                                title: Text(ingredient),
+                                subtitle: Text(measure),
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          "Instructions",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          foodDetail[0].strInstructions,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        SizedBox(height: 16,)
+                      ],
                     ),
                     _ => SizedBox.shrink(),
                   };
