@@ -19,7 +19,6 @@ class FoodResponse {
   };
 }
 
-
 class Meal {
   final String idMeal;
   final String strMeal;

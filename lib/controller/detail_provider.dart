@@ -20,7 +20,6 @@ class DetailProvider extends ChangeNotifier {
       _emit(DetailLoadingResultState());
 
       final result = await _service.getFoodDetail(name);
-      debugPrint("data >>> ${result.meals}");
       if (result.meals.isEmpty) {
         _emit(DetailErrorResultState(Helper.errEmpty));
       } else {

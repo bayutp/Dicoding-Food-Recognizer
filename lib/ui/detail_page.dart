@@ -144,7 +144,8 @@ class _DetailViewState extends State<DetailView> {
                             shrinkWrap: true,
                             itemCount: foodDetail[0].ingredients.length,
                             itemBuilder: (context, index) {
-                              final ingredient = foodDetail[0].ingredients[index];
+                              final ingredient =
+                                  foodDetail[0].ingredients[index];
                               final measure = foodDetail[0].measures[index];
                               return ListTile(
                                 title: Text(ingredient),
@@ -169,7 +170,7 @@ class _DetailViewState extends State<DetailView> {
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        SizedBox(height: 16,)
+                        SizedBox(height: 16),
                       ],
                     ),
                     _ => SizedBox.shrink(),
