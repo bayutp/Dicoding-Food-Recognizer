@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:food_recognizer_app/controller/home_provider.dart';
 import 'package:food_recognizer_app/controller/image_classification_provider.dart';
+import 'package:food_recognizer_app/data/model/food.dart';
 import 'package:food_recognizer_app/service/image_classification_service.dart';
 import 'package:food_recognizer_app/static/classifications_state.dart';
+import 'package:food_recognizer_app/static/navigation_route.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -118,7 +120,22 @@ class _HomeBodyState extends State<_HomeBody> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          final name = value.classification.entries.first.key;
+                          final score =
+                              value.classification.entries.first.value;
+                          final food = Food(
+                            name: name,
+                            imagePath: imagePath.toString(),
+                            score: score,
+                          );
+
+                          Navigator.pushNamed(
+                            context,
+                            NavigationRoute.detailRoute.name,
+                            arguments: food,
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 20,
