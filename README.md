@@ -1,7 +1,7 @@
 # Food Recognizer App 
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.24-blue)](https://flutter.dev)  
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/bayutp/Dicoding-Food-Recognizer/blob/main/LICENSE)  
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/bayutp/Dicoding-Food-Recognizer/blob/main/LICENCE)  
 
 Submission project untuk kelas [Belajar Penerapan Machine Learning untuk Flutter](https://www.dicoding.com/academies/758).  
 
