@@ -34,7 +34,6 @@ class HomeProvider extends ChangeNotifier {
     if (imagePath != null) {
       final CroppedFile? cropped = await ImageCropper().cropImage(
         sourcePath: imagePath!,
-        aspectRatio: const CropAspectRatio(ratioX: 2, ratioY: 3),
         uiSettings: [
           AndroidUiSettings(
             toolbarTitle: 'Cropper',
